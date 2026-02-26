@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-orange-10: 239, 102, 86; /* #EF6656*/
+    --color-white-10: 248, 249, 250; /* #F8F9FA */
+    --color-blue-10: 10, 36, 63; /* #0A243F */
+    --color-gray-10: 33, 37, 41; /* #212529 */
+    --color-gray-20: 07, 123, 138; /* #6B7B8A */
+    --color-gray-30: 117, 129, 156; /* #75819C */
+    --color-gray-40: 30, 30, 30; /* #1E1E1E */
+    --color-gray-50: 229, 231, 235; /* #E5E7EB */
+    --color-red-10: 189, 67, 54; /* #BD4336 */
+    --color-red-20: 74, 12, 7; /* #4A0C07 */
+    --color-green-10: 78, 136, 114; /* #4E8872 */
+    --color-green-20: 223, 239, 233; /* #DFEFE9 */
+    --color-green-30: 5, 150, 105; /* #059669 */
+    --color-green-40: 16, 185, 129; /* #10B981 */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  40% {
+    width: 100%;
+  }
+  60% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #6b7b8a;
+  animation:
+    typing 4s steps(40, end) infinite,
+    blink 0.7s step-end infinite;
+}
