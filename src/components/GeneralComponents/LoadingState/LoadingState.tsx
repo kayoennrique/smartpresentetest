@@ -2,9 +2,7 @@
 
 import { Container } from '../Container/Container';
 
-type Props = {
-  text?: string;
-};
+import type { Props } from './type';
 
 export default function LoadingState({ text = 'Carregando...' }: Props) {
   return (

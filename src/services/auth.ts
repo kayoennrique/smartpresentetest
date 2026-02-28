@@ -3,7 +3,6 @@ import type {
   RequestRecoverPasswordInput,
   ResetPasswordInput,
 } from '@/types/resetpassword';
-import { saveSession } from '@/utils/auth';
 
 import { api } from './api';
 
@@ -15,33 +14,48 @@ export async function registerUser(data: {
 }) {
   const res = await api.post<AuthResponse>('/client-auth/register', data);
 
-  const accessToken = (res.data as any)?.accessToken;
-  if (!accessToken) {throw new Error('Access token não retornado pela API');}
+  const { accessToken } = res.data;
 
-  saveSession(accessToken, data.name);
+  if (!accessToken) {
+    throw new Error('Access token não retornado pela API');
+  }
 
-  return res.data;
+  return { accessToken, name: data.name };
 }
 
-export async function loginUser(data: { email: string; password: string }) {
+export async function loginUser(data: {
+  email: string;
+  password: string;
+}) {
   const res = await api.post<AuthResponse>('/client-auth/login', data);
 
-  const accessToken = (res.data as any)?.accessToken;
-  if (!accessToken) {throw new Error('Access token não retornado pela API');}
+  const { accessToken } = res.data;
 
-  saveSession(accessToken);
+  if (!accessToken) {
+    throw new Error('Access token não retornado pela API');
+  }
 
-  return res.data;
+  return { accessToken };
 }
 
-export async function requestRecoverPassword(input: RequestRecoverPasswordInput) {
-  const { data } = await api.post('/client-auth/recover-password/request', input);
+export async function requestRecoverPassword(
+  input: RequestRecoverPasswordInput,
+) {
+  const { data } = await api.post<void>(
+    '/client-auth/recover-password/request',
+    input,
+  );
+
   return data;
 }
 
 export const requestPasswordReset = requestRecoverPassword;
 
 export async function resetPassword(input: ResetPasswordInput) {
-  const { data } = await api.post('/client-auth/recover-password/reset', input);
+  const { data } = await api.post<void>(
+    '/client-auth/recover-password/reset',
+    input,
+  );
+
   return data;
 }

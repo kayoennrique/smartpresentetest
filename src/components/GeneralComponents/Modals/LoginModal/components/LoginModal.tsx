@@ -1,10 +1,11 @@
-import useLoginModal from '@/hooks/useLoginModal';
+import useLoginModal from "@/hooks/useLoginModal";
 
-import Modal from '../Modal/Modal';
+import Modal from "../../Modal/Modal";
+import type { LoginModalProps } from "../interface";
 
-import ForgotForm from './components/ForgotForm';
-import LoginForm from './components/LoginForm';
-import type { LoginModalProps } from './interface';
+import ForgotForm from "./ForgotForm";
+import LoginForm from "./LoginForm";
+
 
 export default function LoginModal({ open, onClose, onOpenRegister, onLoginSuccess }: LoginModalProps) {
   const {
