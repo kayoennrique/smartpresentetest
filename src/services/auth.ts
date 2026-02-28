@@ -1,10 +1,11 @@
-import {
+import type {
   AuthResponse,
   RequestRecoverPasswordInput,
   ResetPasswordInput,
 } from '@/types/resetpassword';
-import { api } from './api';
 import { saveSession } from '@/utils/auth';
+
+import { api } from './api';
 
 export async function registerUser(data: {
   name: string;
@@ -15,7 +16,7 @@ export async function registerUser(data: {
   const res = await api.post<AuthResponse>('/client-auth/register', data);
 
   const accessToken = (res.data as any)?.accessToken;
-  if (!accessToken) throw new Error('Access token não retornado pela API');
+  if (!accessToken) {throw new Error('Access token não retornado pela API');}
 
   saveSession(accessToken, data.name);
 
@@ -26,7 +27,7 @@ export async function loginUser(data: { email: string; password: string }) {
   const res = await api.post<AuthResponse>('/client-auth/login', data);
 
   const accessToken = (res.data as any)?.accessToken;
-  if (!accessToken) throw new Error('Access token não retornado pela API');
+  if (!accessToken) {throw new Error('Access token não retornado pela API');}
 
   saveSession(accessToken);
 

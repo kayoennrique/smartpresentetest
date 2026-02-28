@@ -1,4 +1,4 @@
-import { FaqItem } from '../interfaces';
+import type { FaqItem } from '../interfaces';
 
 export type TabId = 'comofunciona' | 'listas' | 'presente' | 'parcerias';
 
@@ -22,7 +22,7 @@ export const faqByTab: Record<TabId, FaqItem[]> = {
     {
       title: 'O que é MBTI?',
       content:
-        'MBTI é um modelo de personalidade usado no mundo todo para entender preferências, forma de decidir e estilo das pessoas. Ele organiza esses perfis em 16 tipos, ajudando a identificar o que tende a combinar mais com cada pessoa.',
+        'MBTI (Indicador de Tipo Myers-Briggs) é um modelo de personalidade utilizado no mundo todo para compreender preferências, forma de decisão e estilo de interação das pessoas.​ Ele organiza os perfis em 16 tipos: o empreendedor, o inspirador, o protagonista, o provedor, o cuidador, o conselheiro, o sonhador, o animador, o analista, o artista,  o comandante, o inventor, o executivo, o arquiteto, o inspetor, o técnico, ajudando a identificar padrões de comportamento e o que tende a combinar melhor com cada pessoa.',
     },
     {
       title: 'Como o MBTI é usado pelo Smartpresente?',

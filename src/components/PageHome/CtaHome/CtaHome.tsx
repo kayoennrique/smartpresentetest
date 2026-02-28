@@ -1,8 +1,9 @@
 'use client';
 
+import Image from 'next/image';
+
 import { Container } from '@/components/GeneralComponents/Container/Container';
 import SearchButton from '@/components/GeneralComponents/SearchButton/SearchButton';
-import Image from 'next/image';
 
 export default function CtaHome() {
   return (

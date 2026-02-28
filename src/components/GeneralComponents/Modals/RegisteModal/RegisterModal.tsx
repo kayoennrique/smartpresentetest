@@ -1,14 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Icon } from '@iconify/react';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Modal from '../Modal/Modal';
+import { Icon } from '@iconify/react';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import type { RegisterFormData } from '@/schemas/register.schema';
+import { registerSchema } from '@/schemas/register.schema';
 import { registerUser } from '@/services/auth';
-import { registerSchema, RegisterFormData } from '@/schemas/register.schema';
 import { normalizePhoneToE164 } from '@/utils/phone';
-import { RegisterModalProps } from './interface';
+
+import Modal from '../Modal/Modal';
+
+import type { RegisterModalProps } from './interface';
 
 export default function RegisterModal({ open, onClose, onOpenLogin }: RegisterModalProps) {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,16 +30,16 @@ export default function RegisterModal({ open, onClose, onOpenLogin }: RegisterMo
   });
 
   useEffect(() => {
-    if (!open) reset();
+    if (!open) {reset();}
   }, [open, reset]);
 
   const password = watch('password') || '';
 
   function getPasswordStrength() {
     let strength = 0;
-    if (password.length >= 6) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
+    if (password.length >= 6) {strength++;}
+    if (/[A-Z]/.test(password)) {strength++;}
+    if (/[0-9]/.test(password)) {strength++;}
     return strength;
   }
 

@@ -2,20 +2,21 @@
 
 import { useEffect, useState } from 'react';
 
-import { SeventhQuestionsProps } from './interface';
-import { PRICE_OPTIONS, PriceOptionId } from './priceOptions';
-import { PRICE_MAP } from './priceMap';
 
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
+
+import type { SeventhQuestionsProps } from './interface';
+import { PRICE_MAP } from './priceMap';
+import { PRICE_OPTIONS } from './priceOptions';
+import type { PriceOptionId } from './priceOptions';
 
 const SURVEY_KEY = 'survey-answers';
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -24,7 +25,7 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 function updateSurveyAnswers(patch: Record<string, any>) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
 
   const current = safeParse<Record<string, any>>(localStorage.getItem(SURVEY_KEY)) || {};
 
@@ -32,12 +33,12 @@ function updateSurveyAnswers(patch: Record<string, any>) {
 }
 
 function findPriceOptionIdByRange(min?: unknown, max?: unknown): PriceOptionId | null {
-  if (typeof min !== 'string' || typeof max !== 'string') return null;
+  if (typeof min !== 'string' || typeof max !== 'string') {return null;}
 
   const entries = Object.entries(PRICE_MAP) as Array<[PriceOptionId, { min: string; max: string }]>;
 
   for (const [id, range] of entries) {
-    if (range.min === min && range.max === max) return id;
+    if (range.min === min && range.max === max) {return id;}
   }
 
   return null;
@@ -76,7 +77,7 @@ export default function SeventhQuestions({
   };
 
   const handleNext = () => {
-    if (!selectedPrice) return;
+    if (!selectedPrice) {return;}
 
     const range = PRICE_MAP[selectedPrice];
 

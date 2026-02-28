@@ -1,13 +1,14 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
-import type { SecondStepDetailsProps as Props } from './types';
+import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
-import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+
+import type { SecondStepDetailsProps as Props } from './types';
 
 function formatBRLFromCents(value: number) {
   return `R$ ${(value / 100).toFixed(2).replace('.', ',')}`;
@@ -23,7 +24,7 @@ export default function SecondStepDetails({
   submitError = null,
 }: Props) {
   const toggleSelect = (id: string) => {
-    if (!id) return;
+    if (!id) {return;}
     onSelect(selectedProductId === id ? '' : id);
   };
 

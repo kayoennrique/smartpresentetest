@@ -1,6 +1,7 @@
 'use client';
 
 import { Icon } from '@iconify/react';
+
 import type { SurveyActionsProps } from './interface';
 
 export default function SurveyActions(props: SurveyActionsProps) {

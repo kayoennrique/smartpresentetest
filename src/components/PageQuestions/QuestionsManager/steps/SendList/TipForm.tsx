@@ -1,6 +1,6 @@
 'use client';
 
-import { TipFormProps } from './interface';
+import type { TipFormProps } from './interface';
 
 export default function TipForm({
   productName,

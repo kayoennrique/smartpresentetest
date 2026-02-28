@@ -1,10 +1,12 @@
 'use client';
 
-import { Container } from '@/components/GeneralComponents/Container/Container';
-import { QuestionsHeaderProps } from './type';
-
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+
+import { Container } from '@/components/GeneralComponents/Container/Container';
+
+import type { QuestionsHeaderProps } from './type';
+
 
 const THEME = {
   light: {

@@ -1,9 +1,10 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { useEffect } from "react";
 import Image from "next/image";
-import { PreviewModalProps } from "./interface";
+import { useEffect } from "react";
+
+import type { PreviewModalProps } from "./interface";
 
 const giftImages = [
   "/amarelo.png",

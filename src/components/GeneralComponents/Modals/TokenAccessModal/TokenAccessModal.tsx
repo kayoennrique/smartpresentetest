@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-import { TokenAccessModalProps } from './type';
+
+import type { TokenAccessModalProps } from './type';
 
 function normalizeCode(raw: string) {
   return (raw || '')
@@ -16,7 +18,7 @@ function normalizeCode(raw: string) {
 function splitToFixed(token: string, size = 6) {
   const t = normalizeCode(token).slice(0, size);
   const chars = t.split('');
-  while (chars.length < size) chars.push('');
+  while (chars.length < size) {chars.push('');}
   return chars;
 }
 
@@ -34,7 +36,7 @@ export default function TokenAccessModal({ open, onClose }: TokenAccessModalProp
 
   const focusIndex = (idx: number) => {
     const el = inputsRef.current[idx];
-    if (!el) return;
+    if (!el) {return;}
     el.focus();
     el.select();
   };
@@ -51,14 +53,14 @@ export default function TokenAccessModal({ open, onClose }: TokenAccessModalProp
   };
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {return;}
 
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'Enter' && isValid) handleGo();
+      if (e.key === 'Escape') {onClose();}
+      if (e.key === 'Enter' && isValid) {handleGo();}
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -78,7 +80,7 @@ export default function TokenAccessModal({ open, onClose }: TokenAccessModalProp
     }
   }, [open]);
 
-  if (!open) return null;
+  if (!open) {return null;}
 
   const setCharAt = (idx: number, value: string) => {
     setChars((prev) => {
@@ -154,7 +156,7 @@ export default function TokenAccessModal({ open, onClose }: TokenAccessModalProp
       role="dialog"
       aria-modal="true"
       onMouseDown={(e) => {
-        if (e.target !== e.currentTarget) return;
+        if (e.target !== e.currentTarget) {return;}
         e.preventDefault();
         e.stopPropagation();
         onClose();

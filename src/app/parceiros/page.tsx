@@ -1,8 +1,7 @@
+import Footer from "@/components/GeneralComponents/Footer/Footer";
 import Header from "@/components/GeneralComponents/Header/Header";
-
 import ContactPartner from "@/components/PagePartner/ContactPartner/ContactPartner";
 
-import Footer from "@/components/GeneralComponents/Footer/Footer";
 
 export default function Page() {
   return (

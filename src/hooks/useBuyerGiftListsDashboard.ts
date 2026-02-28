@@ -1,14 +1,15 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+
 import { getBuyerGiftLists } from '@/services/buyerGiftLists';
+import type { BuyerListVM } from '@/types/dashboard';
 import { normalizeBuyerGiftLists } from '@/utils/normalizeBuyerGiftLists';
-import { BuyerListVM } from '@/types/dashboard';
 
 function inferHasMore(res: any, receivedCount: number, limit: number, page: number) {
   const meta = res?.meta ?? res?.pagination ?? res?.pageInfo ?? null;
 
-  if (typeof meta?.hasNext === 'boolean') return meta.hasNext;
+  if (typeof meta?.hasNext === 'boolean') {return meta.hasNext;}
 
   const total =
     (typeof meta?.total === 'number' ? meta.total : null) ??
@@ -42,8 +43,8 @@ export function useBuyerGiftListsDashboard({
 
     setHasMoreApi(inferHasMore(res, normalized.length, limit, nextPage));
 
-    if (mode === 'replace') setLists(normalized);
-    else setLists((prev) => [...prev, ...normalized]);
+    if (mode === 'replace') {setLists(normalized);}
+    else {setLists((prev) => [...prev, ...normalized]);}
 
     return normalized.length;
   }
@@ -57,14 +58,14 @@ export function useBuyerGiftListsDashboard({
 
       try {
         await fetchPage(1, 'replace');
-        if (cancel) return;
+        if (cancel) {return;}
 
         setPage(1);
         setVisibleCount(step);
       } catch (e: any) {
-        if (!cancel) setError(e?.message || 'Erro ao carregar.');
+        if (!cancel) {setError(e?.message || 'Erro ao carregar.');}
       } finally {
-        if (!cancel) setLoading(false);
+        if (!cancel) {setLoading(false);}
       }
     }
 
@@ -85,7 +86,7 @@ export function useBuyerGiftListsDashboard({
       return;
     }
 
-    if (!hasMoreApi || loadingMore) return;
+    if (!hasMoreApi || loadingMore) {return;}
 
     setLoadingMore(true);
     setError(null);

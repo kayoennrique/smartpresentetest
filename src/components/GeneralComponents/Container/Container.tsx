@@ -1,6 +1,7 @@
-import React from "react";
 import clsx from "clsx";
-import { ContainerProps } from "./types";
+import React from "react";
+
+import type { ContainerProps } from "./types";
 
 export const Container: React.FC<ContainerProps> = ({
   children,

@@ -1,8 +1,8 @@
 export function getFirstQuestionAnswer(): string | null {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined") {return null;}
 
   const stored = localStorage.getItem("survey-answers");
-  if (!stored) return null;
+  if (!stored) {return null;}
 
   try {
     const data = JSON.parse(stored);
@@ -13,7 +13,7 @@ export function getFirstQuestionAnswer(): string | null {
 }
 
 export function mapPersonToTipKey(value: string | null) {
-  if (!value) return "pessoa_qualquer";
+  if (!value) {return "pessoa_qualquer";}
 
   const map: Record<string, string> = {
     NAMORADO: "namorado",

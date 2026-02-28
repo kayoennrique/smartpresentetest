@@ -1,15 +1,18 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
-import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-import { TokenModalProps } from './interface';
 import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+
+import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+
+import type { TokenModalProps } from './interface';
+
 
 function splitToken(token: string, size = 6) {
   const t = (token || '').replace(/\s/g, '').toUpperCase();
   const chars = t.slice(0, size).split('');
-  while (chars.length < size) chars.push('X');
+  while (chars.length < size) {chars.push('X');}
   return chars;
 }
 
@@ -20,13 +23,13 @@ export default function TokenModal({ open, token, onClose, setIsPreviewOpen }: T
   const router = useRouter();
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {return;}
 
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {onClose();}
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -37,12 +40,12 @@ export default function TokenModal({ open, token, onClose, setIsPreviewOpen }: T
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open) {return null;}
 
   const tokenChars = splitToken(token, 6);
 
   const handleCopy = async () => {
-    if (!token || isCopying) return;
+    if (!token || isCopying) {return;}
 
     setIsCopying(true);
     setCopied(false);
@@ -80,7 +83,7 @@ export default function TokenModal({ open, token, onClose, setIsPreviewOpen }: T
       role="dialog"
       aria-modal="true"
       onMouseDown={(e) => {
-        if (e.target !== e.currentTarget) return;
+        if (e.target !== e.currentTarget) {return;}
         e.preventDefault();
         e.stopPropagation();
       }}

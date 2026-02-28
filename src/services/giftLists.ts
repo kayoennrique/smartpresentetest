@@ -1,6 +1,9 @@
-import { ApiError } from '@/types/lists';
+import type { AxiosError } from 'axios';
+import axios from 'axios';
+
+import type { ApiError } from '@/types/lists';
+
 import { api } from './api';
-import axios, { AxiosError } from 'axios';
 
 function normalizeAxiosError(err: unknown): ApiError {
   if (axios.isAxiosError(err)) {

@@ -1,14 +1,15 @@
 'use client';
 
+import axios from 'axios';
 import Image from 'next/image';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { z } from 'zod';
-import axios from 'axios';
 
+import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
-import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+
 import type { ThirdStepConfirmPayload, ThirdStepProps } from './types';
 
 function onlyDigits(v: string) {
@@ -158,7 +159,7 @@ export default function ThirdStep({
 
   function scrollToField(key: FieldKey) {
     const el = refs.current[key];
-    if (!el) return;
+    if (!el) {return;}
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
@@ -166,7 +167,7 @@ export default function ThirdStep({
     const next: FormErrors = {};
     for (const issue of issues) {
       const key = issue.path?.[0] as FieldKey | undefined;
-      if (key && !next[key]) next[key] = issue.message;
+      if (key && !next[key]) {next[key] = issue.message;}
     }
     return next;
   }
@@ -204,7 +205,7 @@ export default function ThirdStep({
 
     if (parsed.success) {
       setFieldErrors((prev) => {
-        if (!prev[key]) return prev;
+        if (!prev[key]) {return prev;}
         const next = { ...prev };
         delete next[key];
         return next;
@@ -216,8 +217,8 @@ export default function ThirdStep({
 
     setFieldErrors((prev) => {
       const next = { ...prev };
-      if (nextErrors[key]) next[key] = nextErrors[key]!;
-      else delete next[key];
+      if (nextErrors[key]) {next[key] = nextErrors[key]!;}
+      else {delete next[key];}
       return next;
     });
   }
@@ -239,12 +240,12 @@ export default function ThirdStep({
   }
 
   async function fetchAddressByCep(cepDigits: string) {
-    if (lastCepFetchedRef.current === cepDigits) return;
+    if (lastCepFetchedRef.current === cepDigits) {return;}
 
     setCepLoading(true);
     setCepFetchError(null);
 
-    if (cepCancelRef.current) cepCancelRef.current.abort();
+    if (cepCancelRef.current) {cepCancelRef.current.abort();}
     const controller = new AbortController();
     cepCancelRef.current = controller;
 
@@ -261,10 +262,10 @@ export default function ThirdStep({
 
       lastCepFetchedRef.current = cepDigits;
 
-      if (data.logradouro) setStreet(data.logradouro);
-      if (data.bairro) setNeighborhood(data.bairro);
-      if (data.localidade) setCity(data.localidade);
-      if (data.uf) setStateUF(data.uf);
+      if (data.logradouro) {setStreet(data.logradouro);}
+      if (data.bairro) {setNeighborhood(data.bairro);}
+      if (data.localidade) {setCity(data.localidade);}
+      if (data.uf) {setStateUF(data.uf);}
 
       validateField('recipientAddressStreet');
       validateField('recipientAddressNeighborhood');
@@ -285,7 +286,7 @@ export default function ThirdStep({
       setCepFetchError(null);
       setCepLoading(false);
       lastCepFetchedRef.current = '';
-      if (cepCancelRef.current) cepCancelRef.current.abort();
+      if (cepCancelRef.current) {cepCancelRef.current.abort();}
       return;
     }
 
@@ -297,7 +298,7 @@ export default function ThirdStep({
   }, [postalCode]);
 
   const handleConfirm = () => {
-    if (submitting) return;
+    if (submitting) {return;}
 
     if (cepLoading) {
       setTouched((prev) => ({ ...prev, recipientAddressPostalCode: true }));
@@ -333,7 +334,7 @@ export default function ThirdStep({
         <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
 
         <QuestionsTitle
-          title="Coloque o endereço de envio"
+          title="Informe o endereço de envio "
           subtitle="Nós repassaremos esse endereço para seu presenteado."
         />
 
@@ -366,7 +367,7 @@ export default function ThirdStep({
                   onChange={(e) => {
                     setPostalCode(e.target.value);
                     if (touched.recipientAddressPostalCode)
-                      validateField('recipientAddressPostalCode');
+                      {validateField('recipientAddressPostalCode');}
                   }}
                   onBlur={() => markTouched('recipientAddressPostalCode')}
                   placeholder="01001-000"
@@ -398,7 +399,7 @@ export default function ThirdStep({
                 value={street}
                 onChange={(e) => {
                   setStreet(e.target.value);
-                  if (touched.recipientAddressStreet) validateField('recipientAddressStreet');
+                  if (touched.recipientAddressStreet) {validateField('recipientAddressStreet');}
                 }}
                 onBlur={() => markTouched('recipientAddressStreet')}
                 placeholder="Rua das Flores"
@@ -418,7 +419,7 @@ export default function ThirdStep({
                   value={number}
                   onChange={(e) => {
                     setNumber(e.target.value);
-                    if (touched.recipientAddressNumber) validateField('recipientAddressNumber');
+                    if (touched.recipientAddressNumber) {validateField('recipientAddressNumber');}
                   }}
                   onBlur={() => markTouched('recipientAddressNumber')}
                   placeholder="123"
@@ -439,7 +440,7 @@ export default function ThirdStep({
                   onChange={(e) => {
                     setComplement(e.target.value);
                     if (touched.recipientAddressComplement)
-                      validateField('recipientAddressComplement');
+                      {validateField('recipientAddressComplement');}
                   }}
                   onBlur={() => markTouched('recipientAddressComplement')}
                   placeholder="Apto 12B"
@@ -461,7 +462,7 @@ export default function ThirdStep({
                 onChange={(e) => {
                   setNeighborhood(e.target.value);
                   if (touched.recipientAddressNeighborhood)
-                    validateField('recipientAddressNeighborhood');
+                    {validateField('recipientAddressNeighborhood');}
                 }}
                 onBlur={() => markTouched('recipientAddressNeighborhood')}
                 placeholder="Centro"
@@ -480,7 +481,7 @@ export default function ThirdStep({
                 value={city}
                 onChange={(e) => {
                   setCity(e.target.value);
-                  if (touched.recipientAddressCity) validateField('recipientAddressCity');
+                  if (touched.recipientAddressCity) {validateField('recipientAddressCity');}
                 }}
                 onBlur={() => markTouched('recipientAddressCity')}
                 placeholder="São Paulo"
@@ -499,7 +500,7 @@ export default function ThirdStep({
                 value={stateUF}
                 onChange={(e) => {
                   setStateUF(e.target.value);
-                  if (touched.recipientAddressState) validateField('recipientAddressState');
+                  if (touched.recipientAddressState) {validateField('recipientAddressState');}
                 }}
                 onBlur={() => markTouched('recipientAddressState')}
                 placeholder="SP"

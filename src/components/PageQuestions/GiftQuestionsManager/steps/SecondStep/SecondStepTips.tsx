@@ -1,9 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
+import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
+
 import type { SecondStepTipsProps, TipItem } from './types';
 
 const giftImages = [
@@ -29,7 +31,7 @@ export default function SecondStepTips({
   submitError = null,
 }: SecondStepTipsProps) {
   const toggleSelect = (id: string, index: number) => {
-    if (!id) return;
+    if (!id) {return;}
 
     if (selectedProductId === id) {
       onSelect('', index);
@@ -44,7 +46,7 @@ export default function SecondStepTips({
   };
 
   const handleNext = () => {
-    if (!selectedProductId || submitting) return;
+    if (!selectedProductId || submitting) {return;}
     onConfirm?.();
   };
 

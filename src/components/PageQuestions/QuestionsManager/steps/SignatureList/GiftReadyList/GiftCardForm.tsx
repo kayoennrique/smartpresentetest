@@ -1,12 +1,12 @@
 'use client';
 
-import { GiftCardFormProps } from './types';
+import type { GiftCardFormProps } from './types';
 
 function signatureIndentPx(name: string) {
   // Ajuste fino: letras cursivas com “rabisco” inicial maior costumam precisar de mais recuo.
   const first = (name || '').trim().charAt(0).toUpperCase();
 
-  if (['A', 'K', 'J', 'T', 'Z'].includes(first)) return 12;
+  if (['A', 'K', 'J', 'T', 'Z'].includes(first)) {return 12;}
   return 10;
 }
 

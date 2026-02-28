@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { TipImageProps } from "./interface";
+
+import type { TipImageProps } from "./interface";
 
 export default function TipImage({ imageUrl, alt, className }: TipImageProps) {
   return (

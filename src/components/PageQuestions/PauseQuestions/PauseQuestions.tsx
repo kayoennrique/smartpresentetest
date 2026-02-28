@@ -1,10 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+
 import QuestionsHeader from '../QuestionsHeader/QuestionsHeader';
 
-import { PauseQuestionsProps } from './interface';
+import type { PauseQuestionsProps } from './interface';
 
 export default function PauseQuestions({ onNext, onBack }: PauseQuestionsProps) {
   return (

@@ -1,8 +1,9 @@
 'use client';
 
 import { Container } from '@/components/GeneralComponents/Container/Container';
+
+import type { CtaHeroFaqProps } from '../interfaces';
 import { SearchInput } from '../SearchInput/SearchInput';
-import { CtaHeroFaqProps } from '../interfaces';
 
 export default function CtaHeroFaq({ searchTerm, setSearchTerm }: CtaHeroFaqProps) {
   return (

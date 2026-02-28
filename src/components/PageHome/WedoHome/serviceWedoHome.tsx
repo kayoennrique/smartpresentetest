@@ -1,10 +1,11 @@
-import { ServiceWedoHome } from './interface';
+import { Icon } from '@iconify/react';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { FaRegEye } from 'react-icons/fa6';
+import { IoShareSocialOutline } from 'react-icons/io5';
+
+import type { ServiceWedoHome } from './interface';
 
 // Icons:
-import { IoShareSocialOutline } from 'react-icons/io5';
-import { FaRegEye } from 'react-icons/fa6';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Icon } from '@iconify/react';
 
 export const servicesWedoHome: ServiceWedoHome[] = [
   {

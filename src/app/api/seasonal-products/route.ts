@@ -1,5 +1,7 @@
-import { NextResponse } from 'next/server';
 import axios from 'axios';
+import { NextResponse } from 'next/server';
+
+import { upstream } from '@/server/upstream';
 
 export async function GET(req: Request) {
   try {
@@ -7,15 +9,7 @@ export async function GET(req: Request) {
     const page = url.searchParams.get('page') ?? '1';
     const limit = url.searchParams.get('limit') ?? '50';
 
-    const base = (process.env.API_BASE_URL ?? '').replace(/\/$/, '').replace(/\/api$/, '');
-
-    if (!base) {
-      return NextResponse.json({ message: 'API_BASE_URL não configurada' }, { status: 500 });
-    }
-
-    const upstream = `${base}/api/seasonal-products`;
-
-    const { data, status } = await axios.get(upstream, {
+    const { data, status } = await axios.get(upstream('/seasonal-products'), {
       params: { page, limit },
       timeout: 20000,
     });

@@ -1,4 +1,4 @@
-import { TestimonialProps } from './interface';
+import type { TestimonialProps } from './interface';
 
 export const testimonials: TestimonialProps[] = [
   {

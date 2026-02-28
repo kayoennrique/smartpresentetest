@@ -1,7 +1,9 @@
 'use client';
 
-import { Container } from '@/components/GeneralComponents/Container/Container';
 import Image from 'next/image';
+
+import { Container } from '@/components/GeneralComponents/Container/Container';
+
 import { testimonials } from './testimonials';
 
 export default function TestimonialsSection() {

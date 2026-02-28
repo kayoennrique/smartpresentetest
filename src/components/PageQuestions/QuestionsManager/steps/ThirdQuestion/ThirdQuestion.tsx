@@ -1,19 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ThirdQuestionProps } from './interface';
-import { INTEREST_OPTIONS } from './interestOptions';
 
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
+
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
+
+import { INTEREST_OPTIONS } from './interestOptions';
+import type { ThirdQuestionProps } from './interface';
 
 const SURVEY_KEY = 'survey-answers';
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -22,7 +23,7 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 function updateSurveyAnswers(patch: Record<string, any>) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
 
   const current = safeParse<Record<string, any>>(localStorage.getItem(SURVEY_KEY)) || {};
 
@@ -53,7 +54,7 @@ export default function ThirdQuestion({
   };
 
   const handleNext = () => {
-    if (!selectedInterest) return;
+    if (!selectedInterest) {return;}
 
     onNext({
       'rq-interesse': selectedInterest,

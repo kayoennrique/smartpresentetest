@@ -1,4 +1,4 @@
-import { PriceOptionId } from "./priceOptions";
+import type { PriceOptionId } from "./priceOptions";
 
 export const PRICE_MAP: Record<PriceOptionId, { min: string; max: string }> = {
   "rq-250": { min: "0.00", max: "250.00" },

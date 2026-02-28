@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
-import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
 import { Icon } from '@iconify/react';
+import { useEffect } from 'react';
+
+import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
 
 type SuccessModalProps = {
   open: boolean;
@@ -35,13 +36,13 @@ export default function SuccessModal({
   closeOnBackdrop = true,
 }: SuccessModalProps) {
   useEffect(() => {
-    if (!open) return;
+    if (!open) {return;}
 
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onPrimaryClick();
+      if (e.key === 'Escape') {onPrimaryClick();}
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -52,7 +53,7 @@ export default function SuccessModal({
     };
   }, [open, onPrimaryClick]);
 
-  if (!open) return null;
+  if (!open) {return null;}
 
   const handleBackdrop = () => {
     if (closeOnBackdrop) {

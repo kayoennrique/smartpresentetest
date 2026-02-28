@@ -1,11 +1,13 @@
 'use client';
 
-import { Container } from '@/components/GeneralComponents/Container/Container';
-import { Icon } from '@iconify/react';
 import emailjs from '@emailjs/browser';
-import { FormEvent, useRef, useState } from 'react';
-import { toast } from 'react-toastify';
+import { Icon } from '@iconify/react';
 import Image from 'next/image';
+import type { FormEvent} from 'react';
+import { useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+
+import { Container } from '@/components/GeneralComponents/Container/Container';
 
 export default function ContactPartner() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -14,7 +16,7 @@ export default function ContactPartner() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!formRef.current || isLoading) return;
+    if (!formRef.current || isLoading) {return;}
 
     setIsLoading(true);
 

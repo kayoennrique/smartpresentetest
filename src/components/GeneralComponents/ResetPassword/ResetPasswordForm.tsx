@@ -1,15 +1,17 @@
 'use client';
 
-import Link from 'next/link';
-import { useMemo, useState } from 'react';
-import { Icon } from '@iconify/react';
-import { useSearchParams } from 'next/navigation';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Icon } from '@iconify/react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
+import type { ResetPasswordFormData } from '@/schemas/resetPassword.schema';
+import { resetPasswordSchema } from '@/schemas/resetPassword.schema';
 import { resetPassword } from '@/services/auth';
-import { resetPasswordSchema, ResetPasswordFormData } from '@/schemas/resetPassword.schema';
-import { ResetPasswordFormProps } from './types';
+
+import type { ResetPasswordFormProps } from './types';
 
 function normalizeToken(raw: string) {
   return (raw || '').trim().replaceAll(' ', '+');
@@ -48,9 +50,9 @@ export default function ResetPasswordForm({ token: tokenProp }: ResetPasswordFor
   const password = watch('password') || '';
 
   function getPasswordStrength(pwd: string) {
-    if (pwd.length === 0) return 0;
-    if (pwd.length < 6) return 1;
-    if (pwd.length < 10) return 2;
+    if (pwd.length === 0) {return 0;}
+    if (pwd.length < 6) {return 1;}
+    if (pwd.length < 10) {return 2;}
     return 3;
   }
 

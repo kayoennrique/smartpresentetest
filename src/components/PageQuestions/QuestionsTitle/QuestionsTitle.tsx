@@ -1,6 +1,6 @@
 'use client';
 
-import { QuestionsTitleProps } from './type';
+import type { QuestionsTitleProps } from './type';
 
 const THEME = {
   light: {

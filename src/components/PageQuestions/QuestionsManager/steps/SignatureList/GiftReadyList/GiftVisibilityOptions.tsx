@@ -1,6 +1,6 @@
 'use client';
 
-import { GiftVisibilityOptionsProps } from './types';
+import type { GiftVisibilityOptionsProps } from './types';
 
 export default function GiftVisibilityOptions({ value, onChange }: GiftVisibilityOptionsProps) {
   return (

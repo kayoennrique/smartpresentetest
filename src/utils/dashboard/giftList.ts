@@ -19,7 +19,7 @@ export function getSortedItems(list: any): any[] {
   return items.sort((a, b) => {
     const sa = a?.isSelectedByRecipient ? 1 : 0;
     const sb = b?.isSelectedByRecipient ? 1 : 0;
-    if (sa !== sb) return sb - sa;
+    if (sa !== sb) {return sb - sa;}
     return String(a?.id ?? '').localeCompare(String(b?.id ?? ''));
   });
 }
@@ -68,7 +68,7 @@ export function toItemVM(it: any): ItemVM {
 
 export function getSelectedFromList(list: any) {
   const explicit = list?.selected ?? null;
-  if (explicit) return explicit;
+  if (explicit) {return explicit;}
 
   const fromItems = Array.isArray(list?.items)
     ? list.items.find((x: any) => x?.isSelectedByRecipient)

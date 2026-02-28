@@ -1,25 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-import { FirstQuestionProps, HeaderDraft } from './interface';
 
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-import { useGiftListPayloads } from '@/hooks/useGiftList';
-import { GiftVisibilityValue } from './GiftReadyList/types';
-import GiftCardForm from './GiftReadyList/GiftCardForm';
-import GiftVisibilityOptions from './GiftReadyList/GiftVisibilityOptions';
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
+import { useGiftListPayloads } from '@/hooks/useGiftList';
+
+import GiftCardForm from './GiftReadyList/GiftCardForm';
+import GiftVisibilityOptions from './GiftReadyList/GiftVisibilityOptions';
+import type { GiftVisibilityValue } from './GiftReadyList/types';
+import type { FirstQuestionProps, HeaderDraft } from './interface';
 
 const DEFAULT_RECIPIENT_PHONE = process.env.NEXT_PUBLIC_DEFAULT_RECIPIENT_PHONE || '+5511999999999';
 
 const HEADER_KEY = 'gift-list-header';
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -28,7 +29,7 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 function updateHeaderDraft(patch: Partial<HeaderDraft>) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
 
   const current = safeParse<HeaderDraft>(localStorage.getItem(HEADER_KEY)) || {};
   localStorage.setItem(HEADER_KEY, JSON.stringify({ ...current, ...patch }));
@@ -50,12 +51,12 @@ export default function GiftReadyList({
   const handleBack = () => router.back();
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {return;}
 
     const saved = safeParse<HeaderDraft>(localStorage.getItem(HEADER_KEY)) || {};
 
-    if (typeof saved.senderName === 'string') setFromName(saved.senderName);
-    if (typeof saved.recipientName === 'string') setToName(saved.recipientName);
+    if (typeof saved.senderName === 'string') {setFromName(saved.senderName);}
+    if (typeof saved.recipientName === 'string') {setToName(saved.recipientName);}
 
     if (typeof saved.sendMode === 'string' && saved.sendMode.trim()) {
       setSelectedOption(saved.sendMode as GiftVisibilityValue);
@@ -83,7 +84,7 @@ export default function GiftReadyList({
   };
 
   const handleNext = () => {
-    if (!selectedOption || !fromName.trim() || !toName.trim()) return;
+    if (!selectedOption || !fromName.trim() || !toName.trim()) {return;}
 
     updateHeaderDraft({
       senderName: fromName.trim(),

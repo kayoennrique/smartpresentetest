@@ -1,11 +1,15 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ResultsScreenProps } from './interfaces';
+import Image from 'next/image';
+import Link from 'next/link';
+
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
 import { Container } from '@/components/GeneralComponents/Container/Container';
-import Link from 'next/link';
+
+import type { ResultsScreenProps } from './interfaces';
+
+
 
 export default function ResultsScreen({ products, onRestart, onSendList }: ResultsScreenProps) {
   return (

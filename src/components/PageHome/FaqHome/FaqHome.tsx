@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
+import { useState } from 'react';
+
 import { Container } from '@/components/GeneralComponents/Container/Container';
 
 // Images in /public

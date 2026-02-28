@@ -1,7 +1,8 @@
 "use client";
 
 import { FiSearch } from "react-icons/fi";
-import { SearchInputProps } from "../interfaces";
+
+import type { SearchInputProps } from "../interfaces";
 
 export const SearchInput = ({ value, onChange }: SearchInputProps) => {
   return (

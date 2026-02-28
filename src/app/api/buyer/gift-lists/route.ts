@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server';
 import axios from 'axios';
+import { NextResponse } from 'next/server';
+
 import { upstream } from '@/server/upstream';
 
 const UPSTREAM = upstream('/buyer/gift-lists');

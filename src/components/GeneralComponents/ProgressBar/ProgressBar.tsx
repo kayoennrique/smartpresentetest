@@ -1,4 +1,4 @@
-import { ProgressBarProps } from './interface';
+import type { ProgressBarProps } from './interface';
 
 export default function ProgressBar({
   currentStep,

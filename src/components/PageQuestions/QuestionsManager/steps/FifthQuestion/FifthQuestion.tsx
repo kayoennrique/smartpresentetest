@@ -1,18 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
-import { FifthQuestionProps } from './interface';
+
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-import { Selections } from './types';
-import { choices } from './choices';
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
+
+import { choices } from './choices';
+import type { FifthQuestionProps } from './interface';
+import type { Selections } from './types';
+
 
 const SURVEY_KEY = 'survey-answers';
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -21,7 +24,7 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 function updateSurveyAnswers(patch: Record<string, any>) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
 
   const current = safeParse<Record<string, any>>(localStorage.getItem(SURVEY_KEY)) || {};
   localStorage.setItem(SURVEY_KEY, JSON.stringify({ ...current, ...patch }));
@@ -97,7 +100,7 @@ export default function FifthQuestion({
   };
 
   const handleNext = () => {
-    if (!isFormValid) return;
+    if (!isFormValid) {return;}
 
     const personalityArray = [
       selections.choiceOne,

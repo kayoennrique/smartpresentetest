@@ -1,10 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-import { PlatformContactModalProps } from './interface';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
+import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+
+import type { PlatformContactModalProps } from './interface';
+
 
 export default function PlatformContactModal({
   open,
@@ -14,13 +17,13 @@ export default function PlatformContactModal({
   const router = useRouter();
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {return;}
 
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {onClose();}
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -31,7 +34,7 @@ export default function PlatformContactModal({
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open) {return null;}
 
   return (
     <div
@@ -39,7 +42,7 @@ export default function PlatformContactModal({
       role="dialog"
       aria-modal="true"
       onMouseDown={(e) => {
-        if (e.target !== e.currentTarget) return;
+        if (e.target !== e.currentTarget) {return;}
         e.preventDefault();
         e.stopPropagation();
       }}

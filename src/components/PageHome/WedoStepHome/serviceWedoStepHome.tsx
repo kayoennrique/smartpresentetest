@@ -1,4 +1,4 @@
-import { WedoStepItemProps } from "./interface";
+import type { WedoStepItemProps } from "./interface";
 
 export const steps: WedoStepItemProps[] = [
   {

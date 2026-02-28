@@ -2,17 +2,18 @@
 
 import Image from 'next/image';
 
+import type { BuyerListVM } from '@/types/dashboard';
 import { readAddress } from '@/utils/dashboard/address';
 import { getSelectedFromList, getSortedItems, toItemVM } from '@/utils/dashboard/giftList';
-import SectionTitleDashboard from '../SectionTitleDashboard/SectionTitleDashboard';
+
 import FieldDashboard from '../FieldDashboard/FieldDashboard';
-import { BuyerListVM } from '@/types/dashboard';
+import SectionTitleDashboard from '../SectionTitleDashboard/SectionTitleDashboard';
 
 function formatSentAt(iso: string) {
-  if (!iso || typeof iso !== 'string') return '—';
+  if (!iso || typeof iso !== 'string') {return '—';}
 
   const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return '—';
+  if (Number.isNaN(d.getTime())) {return '—';}
 
   const date = d.toLocaleDateString('pt-BR', {
     day: '2-digit',
@@ -29,7 +30,7 @@ function formatSentAt(iso: string) {
 }
 
 function pickCardText(opts: { hideGifts: boolean; giftHintMessage?: string }) {
-  if (!opts.hideGifts) return '';
+  if (!opts.hideGifts) {return '';}
 
   const hint = String(opts.giftHintMessage || '').trim();
   return hint || '';

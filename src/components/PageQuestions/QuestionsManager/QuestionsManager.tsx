@@ -1,26 +1,26 @@
 'use client';
 
 import { useState } from 'react';
+
+import LoadingState from '@/components/GeneralComponents/LoadingState/LoadingState';
 import { useSurvey } from '@/hooks/useSurvey';
 
 import PauseQuestions from '../PauseQuestions/PauseQuestions';
-import AnalyzingScreen from './steps/AnalyzingScreen/AnalyzingScreen';
 
-import WhatsappQuestion from './steps/WhatsAppComponent/WhatsAppComponent';
-import FirstQuestion from './steps/FirstQuestion/FirstQuestion';
-import SecondQuestion from './steps/SecondQuestion/SecondQuestion';
-import ThirdQuestion from './steps/ThirdQuestion/ThirdQuestion';
-import FourthQuestion from './steps/FourthQuestion/FourthQuestion';
+import AnalyzingScreen from './steps/AnalyzingScreen/AnalyzingScreen';
 import FifthQuestion from './steps/FifthQuestion/FifthQuestion';
-import SixthQuestion from './steps/SixthQuestion/SixthQuestion';
+import FirstQuestion from './steps/FirstQuestion/FirstQuestion';
+import FourthQuestion from './steps/FourthQuestion/FourthQuestion';
+import ResultsScreen from './steps/ResultsScreen/ResultsScreen';
+import SecondQuestion from './steps/SecondQuestion/SecondQuestion';
+import type { ItemPayload } from './steps/SendList/interface';
+import SendList from './steps/SendList/SendList';
+import { saveItems } from './steps/SendList/storage';
 import SeventhQuestions from './steps/SeventhQuestion/SeventhQuestions';
 import GiftReadyList from './steps/SignatureList/SignatureList';
-import SendList from './steps/SendList/SendList';
-import LoadingState from '@/components/GeneralComponents/LoadingState/LoadingState';
-import ResultsScreen from './steps/ResultsScreen/ResultsScreen';
-
-import type { ItemPayload } from './steps/SendList/interface';
-import { saveItems } from './steps/SendList/storage';
+import SixthQuestion from './steps/SixthQuestion/SixthQuestion';
+import ThirdQuestion from './steps/ThirdQuestion/ThirdQuestion';
+import WhatsappQuestion from './steps/WhatsAppComponent/WhatsAppComponent';
 
 const TOTAL_STEPS = 14;
 const TOTAL_QUESTIONS = 10;
@@ -52,7 +52,7 @@ export default function QuestionsManager() {
   const currentQuestionNumber = getQuestionNumber(currentStep);
 
   const handleFinish = async () => {
-    if (isFinishing) return;
+    if (isFinishing) {return;}
     setIsFinishing(true);
 
     try {

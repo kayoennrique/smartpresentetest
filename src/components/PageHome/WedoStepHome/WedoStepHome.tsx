@@ -1,11 +1,13 @@
 'use client';
 
-import { Container } from '@/components/GeneralComponents/Container/Container';
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
-import { useRef, useState, useEffect } from 'react';
-import { steps } from './serviceWedoStepHome';
 import { useRouter } from 'next/navigation';
+import { useRef, useState, useEffect } from 'react';
+
+import { Container } from '@/components/GeneralComponents/Container/Container';
+
+import { steps } from './serviceWedoStepHome';
 
 export default function WedoStepHome() {
   const router = useRouter();
@@ -20,7 +22,7 @@ export default function WedoStepHome() {
 
   useEffect(() => {
     const onScroll = (ref: HTMLDivElement | null) => {
-      if (!ref) return;
+      if (!ref) {return;}
       const idx = Math.round(ref.scrollLeft / ref.clientWidth);
       setCurrentIndex(idx);
     };
@@ -31,12 +33,12 @@ export default function WedoStepHome() {
     const mHandler = () => onScroll(m);
     const dHandler = () => onScroll(d);
 
-    if (m) m.addEventListener('scroll', mHandler);
-    if (d) d.addEventListener('scroll', dHandler);
+    if (m) {m.addEventListener('scroll', mHandler);}
+    if (d) {d.addEventListener('scroll', dHandler);}
 
     return () => {
-      if (m) m.removeEventListener('scroll', mHandler);
-      if (d) d.removeEventListener('scroll', dHandler);
+      if (m) {m.removeEventListener('scroll', mHandler);}
+      if (d) {d.removeEventListener('scroll', dHandler);}
     };
   }, []);
 

@@ -1,10 +1,11 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { ModalProps } from "./interface";
+
+import type { ModalProps } from "./interface";
 
 export default function Modal({ open, onClose, children }: ModalProps) {
-  if (!open) return null;
+  if (!open) {return null;}
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">

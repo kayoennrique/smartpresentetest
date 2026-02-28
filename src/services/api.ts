@@ -1,14 +1,15 @@
-import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
+
 import type { ApiError } from '@/types/lists';
 import { logout } from '@/utils/auth';
 
 const isBrowser = typeof window !== 'undefined';
 
-// ✅ Browser chama o proxy do Next
 const baseURL = '/api';
 
 function readAccessToken() {
-  if (!isBrowser) return '';
+  if (!isBrowser) {return '';}
   return localStorage.getItem('access_token') || '';
 }
 

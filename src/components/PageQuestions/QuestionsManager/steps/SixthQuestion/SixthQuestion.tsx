@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from 'react';
 
-import { SixthQuestionProps } from './interface';
-import { OCCASION_OPTIONS } from './occasionOptions';
 
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
-
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
+
+import type { SixthQuestionProps } from './interface';
+import { OCCASION_OPTIONS } from './occasionOptions';
 
 const SURVEY_KEY = 'survey-answers';
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -23,7 +23,7 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 function updateSurveyAnswers(patch: Record<string, any>) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
 
   const current = safeParse<Record<string, any>>(localStorage.getItem(SURVEY_KEY)) || {};
 
@@ -53,7 +53,7 @@ export default function SixthQuestion({
   };
 
   const handleNext = () => {
-    if (!selectedOccasion) return;
+    if (!selectedOccasion) {return;}
 
     updateSurveyAnswers({ 'rq-ocasiao': selectedOccasion });
 

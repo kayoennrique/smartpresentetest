@@ -2,9 +2,11 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react';
+
 import { Container } from '@/components/GeneralComponents/Container/Container';
+
+import type { ServiceWedoHome } from './interface';
 import { servicesWedoHome } from './serviceWedoHome';
-import { ServiceWedoHome } from './interface';
 
 export default function WedoHome() {
   const [showImage, setShowImage] = useState(false);

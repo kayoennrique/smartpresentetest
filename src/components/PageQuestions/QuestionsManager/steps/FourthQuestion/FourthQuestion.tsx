@@ -2,18 +2,19 @@
 
 import { useEffect, useState } from 'react';
 
-import { FourthQuestionProps } from './interface';
-import { LIFE_STYLE_OPTIONS } from './lifeStyleOptions';
 
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
+
+import type { FourthQuestionProps } from './interface';
+import { LIFE_STYLE_OPTIONS } from './lifeStyleOptions';
 
 const SURVEY_KEY = 'survey-answers';
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -22,14 +23,14 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 function updateSurveyAnswers(patch: Record<string, any>) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
 
   const current = safeParse<Record<string, any>>(localStorage.getItem(SURVEY_KEY)) || {};
   localStorage.setItem(SURVEY_KEY, JSON.stringify({ ...current, ...patch }));
 }
 
 function normalizeSingleSelection(value: unknown): string {
-  if (typeof value === 'string') return value.trim();
+  if (typeof value === 'string') {return value.trim();}
 
   if (Array.isArray(value)) {
     const firstValid = value.find((v) => typeof v === 'string' && v.trim());
@@ -52,7 +53,7 @@ export default function FourthQuestion({
     const savedValue = saved['rq-estilo_vida'];
 
     const normalized = normalizeSingleSelection(savedValue);
-    if (normalized) setSelectedLifeStyle(normalized);
+    if (normalized) {setSelectedLifeStyle(normalized);}
   }, []);
 
   const handleSelect = (id: string) => {
@@ -62,7 +63,7 @@ export default function FourthQuestion({
   };
 
   const handleNext = () => {
-    if (!selectedLifeStyle) return;
+    if (!selectedLifeStyle) {return;}
 
     onNext({
       'rq-estilo_vida': [selectedLifeStyle],

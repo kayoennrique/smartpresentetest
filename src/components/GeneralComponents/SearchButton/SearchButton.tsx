@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { FiSearch } from 'react-icons/fi';
-import { SearchButtonProps } from './interface';
+
+import type { SearchButtonProps } from './interface';
 
 export default function SearchButton({
   href = '/questions',

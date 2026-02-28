@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { SurveyAnswers } from '@/types/survey';
+
 import { api } from '@/services/api';
-import { ApiError } from '@/types/lists';
+import type { ApiError } from '@/types/lists';
+import type { SurveyAnswers } from '@/types/survey';
 
 const STORAGE_KEY = 'survey-answers';
 const API_URL = '/recommendations';
@@ -15,7 +16,7 @@ export function useSurvey(totalSteps: number) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {return;}
 
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -28,7 +29,7 @@ export function useSurvey(totalSteps: number) {
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {return;}
 
     if (Object.keys(answers).length > 0) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
@@ -60,11 +61,11 @@ export function useSurvey(totalSteps: number) {
     setError(null);
 
     try {
-      if (!answers['rq-tipo_presenteado']) throw new Error('Tipo de presenteado é obrigatório');
-      if (!answers['rq-faixa_etaria']) throw new Error('Faixa etária é obrigatória');
-      if (!answers['rq-ocasiao']) throw new Error('Ocasião é obrigatória');
+      if (!answers['rq-tipo_presenteado']) {throw new Error('Tipo de presenteado é obrigatório');}
+      if (!answers['rq-faixa_etaria']) {throw new Error('Faixa etária é obrigatória');}
+      if (!answers['rq-ocasiao']) {throw new Error('Ocasião é obrigatória');}
       if (!answers['rq-mini'] || !answers['rq-max'])
-        throw new Error('Faixa de preço é obrigatória');
+        {throw new Error('Faixa de preço é obrigatória');}
 
       const payload = {
         recipient: answers['rq-tipo_presenteado'],

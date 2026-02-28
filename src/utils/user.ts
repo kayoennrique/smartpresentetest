@@ -1,14 +1,14 @@
 const USER_NAME_KEY = 'user_name';
 
 export function saveUserName(name: string) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
   const v = String(name || '').trim();
-  if (!v) return;
+  if (!v) {return;}
   localStorage.setItem(USER_NAME_KEY, v);
 }
 
 export function getUserNameFromStorage(): string {
-  if (typeof window === 'undefined') return '';
+  if (typeof window === 'undefined') {return '';}
   return String(localStorage.getItem(USER_NAME_KEY) || '').trim();
 }
 
@@ -35,13 +35,13 @@ function base64UrlDecode(input: string) {
 
 export function getJwtPayload(token: string): any | null {
   const t = String(token || '').trim();
-  if (!t) return null;
+  if (!t) {return null;}
 
   const parts = t.split('.');
-  if (parts.length < 2) return null;
+  if (parts.length < 2) {return null;}
 
   const json = base64UrlDecode(parts[1]);
-  if (!json) return null;
+  if (!json) {return null;}
 
   try {
     return JSON.parse(json);
@@ -51,13 +51,13 @@ export function getJwtPayload(token: string): any | null {
 }
 
 export function getAccessToken(): string {
-  if (typeof window === 'undefined') return '';
+  if (typeof window === 'undefined') {return '';}
   return String(localStorage.getItem('access_token') || '').trim();
 }
 
 export function getBestUserName(): string {
   const stored = getUserNameFromStorage();
-  if (stored) return stored;
+  if (stored) {return stored;}
 
   const token = getAccessToken();
   const payload = getJwtPayload(token);

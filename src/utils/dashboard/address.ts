@@ -1,15 +1,15 @@
 function pick(obj: any, keys: string[]) {
   for (const k of keys) {
     const v = obj?.[k];
-    if (typeof v === 'string' && v.trim()) return v.trim();
-    if (typeof v === 'number' && Number.isFinite(v)) return String(v);
+    if (typeof v === 'string' && v.trim()) {return v.trim();}
+    if (typeof v === 'number' && Number.isFinite(v)) {return String(v);}
   }
   return '';
 }
 
 function normalizeCep(raw: string) {
   const digits = (raw || '').replace(/\D/g, '');
-  if (digits.length === 8) return `${digits.slice(0, 5)}-${digits.slice(5)}`;
+  if (digits.length === 8) {return `${digits.slice(0, 5)}-${digits.slice(5)}`;}
   return String(raw || '').trim();
 }
 
@@ -27,14 +27,14 @@ export type AddressVM = {
 
 function parseAddressText(addressText: unknown): AddressVM | null {
   const raw = typeof addressText === 'string' ? addressText.trim() : '';
-  if (!raw) return null;
+  if (!raw) {return null;}
 
   const parts = raw
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean);
 
-  if (parts.length < 2) return null;
+  if (parts.length < 2) {return null;}
 
   const postalCode = parts[0] || '';
   const street = parts[1] || '';
@@ -110,7 +110,7 @@ export function readAddress(list: any): AddressVM {
   }
 
   const parsed = parseAddressText(list?.addressText);
-  if (parsed?.hasAny) return parsed;
+  if (parsed?.hasAny) {return parsed;}
 
   return {
     hasAny: false,

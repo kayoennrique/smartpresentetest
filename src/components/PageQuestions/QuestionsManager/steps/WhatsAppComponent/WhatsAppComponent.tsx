@@ -1,27 +1,30 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
 
-import type { HeaderPayload, ItemPayload, WhatsappQuestionProps } from './interface';
 
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
-import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
 
-import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
-import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
 
-import LoginModal from '@/components/GeneralComponents/Modals/LoginModal/LoginModal';
-import RegisterModal from '@/components/GeneralComponents/Modals/RegisteModal/RegisterModal';
-import TokenModal from '@/components/GeneralComponents/Modals/TokenModal/TokenModal';
 import PlatformContactModal from '@/components/GeneralComponents/Modals/PlatformContactModal/PlatformContactModal';
 
 import { Icon } from '@iconify/react';
-import { normalizePhoneToE164 } from '@/utils/phone';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
+
 import { PatternFormat } from 'react-number-format';
+import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+import LoginModal from '@/components/GeneralComponents/Modals/LoginModal/LoginModal';
+import RegisterModal from '@/components/GeneralComponents/Modals/RegisteModal/RegisterModal';
+import TokenModal from '@/components/GeneralComponents/Modals/TokenModal/TokenModal';
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import PreviewModal from '@/components/PageQuestions/PreviewModal/PreviewModal';
+import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
+import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
 import { api } from '@/services/api';
-import { ApiError } from '@/types/lists';
+import type { ApiError } from '@/types/lists';
+import { normalizePhoneToE164 } from '@/utils/phone';
+
+import type { HeaderPayload, ItemPayload, WhatsappQuestionProps } from './interface';
 
 const ENDPOINT = '/buyer/gift-lists';
 
@@ -33,12 +36,12 @@ const SURVEY_KEY = 'survey-answers';
 const LEGACY_KEYS_TO_REMOVE = ['rq-de', 'rq-para', 'rq-lista_presente'];
 
 function getAuthToken(): string | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined') {return null;}
   return localStorage.getItem('acess_token') || localStorage.getItem('access_token');
 }
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -55,26 +58,26 @@ function normalizeItemsForApi(items: ItemPayload[]): Array<Record<string, any>> 
       const hint = typeof it.giftHintMessage === 'string' ? it.giftHintMessage.trim() : '';
       const base: Record<string, any> = { productId: it.productId };
 
-      if (hint.length > 0) base.giftHintMessage = hint;
-      if (it.giftHintSource) base.giftHintSource = it.giftHintSource;
+      if (hint.length > 0) {base.giftHintMessage = hint;}
+      if (it.giftHintSource) {base.giftHintSource = it.giftHintSource;}
 
       return base;
     });
 }
 
 function clearDraftGiftList() {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
   localStorage.removeItem(HEADER_KEY);
   localStorage.removeItem(ITEMS_KEY);
 }
 
 function clearGiftListMeta() {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
   localStorage.removeItem(GIFT_LIST_META_KEY);
 }
 
 function clearLegacyFromSurveyAnswers() {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
 
   const current = safeParse<Record<string, any>>(localStorage.getItem(SURVEY_KEY)) || {};
   let changed = false;
@@ -86,7 +89,7 @@ function clearLegacyFromSurveyAnswers() {
     }
   }
 
-  if (!changed) return;
+  if (!changed) {return;}
 
   if (Object.keys(current).length > 0) {
     localStorage.setItem(SURVEY_KEY, JSON.stringify(current));
@@ -122,13 +125,13 @@ export default function WhatsappQuestion({
   const [pendingSend, setPendingSend] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {return;}
 
     const itensNotParsed = localStorage.getItem(ITEMS_KEY);
-    if (!itensNotParsed) return;
+    if (!itensNotParsed) {return;}
 
     const itensParsed = safeParse<{ items: ItemPayload[] }>(itensNotParsed);
-    if (!itensParsed?.items?.length) return;
+    if (!itensParsed?.items?.length) {return;}
 
     const restoredTips: Record<string, string> = {};
     for (const item of itensParsed.items) {
@@ -211,8 +214,8 @@ export default function WhatsappQuestion({
 
       setShareCode(code);
 
-      if (contactByClient) setTokenOpen(true);
-      else setPlatformContactOpen(true);
+      if (contactByClient) {setTokenOpen(true);}
+      else {setPlatformContactOpen(true);}
     } catch (e: any) {
       const apiErr = e as ApiError;
       setSubmitError(apiErr?.message || e?.message || 'Erro ao enviar.');
@@ -223,7 +226,7 @@ export default function WhatsappQuestion({
   };
 
   const handleNext = async () => {
-    if (loading) return;
+    if (loading) {return;}
 
     const token = getAuthToken();
     if (!token) {
@@ -248,7 +251,7 @@ export default function WhatsappQuestion({
           className="w-full"
         />
         <div className=" flex flex-col">
-          <p className="text-sm text-gray-500 mb-4 text-left"></p>
+          <p className="text-sm text-gray-500 mb-4 text-left" />
 
           <label className="flex items-center gap-2 text-xs text-gray-500 mb-4 -mt-2">
             <input
@@ -352,7 +355,7 @@ export default function WhatsappQuestion({
         }}
         onLoginSuccess={() => {
           setLoginOpen(false);
-          if (pendingSend) createListAndOpenToken();
+          if (pendingSend) {createListAndOpenToken();}
         }}
       />
 

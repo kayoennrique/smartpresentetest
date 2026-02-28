@@ -1,23 +1,23 @@
-import { BuyerListVM } from '@/types/dashboard';
+import type { BuyerListVM } from '@/types/dashboard';
 
 function publicImageUrl(pathOrUrl: any) {
   const s = String(pathOrUrl || '').trim();
-  if (!s) return '';
-  if (/^https?:\/\//i.test(s)) return s;
+  if (!s) {return '';}
+  if (/^https?:\/\//i.test(s)) {return s;}
 
   const BASE = 'bucket.api.smartpresente.com.br';
   return `${BASE}/${s.replace(/^\/+/, '')}`;
 }
 
 function pickArray(payload: any): any[] {
-  if (Array.isArray(payload?.items)) return payload.items;
-  if (Array.isArray(payload?.data)) return payload.data;
-  if (Array.isArray(payload?.results)) return payload.results;
+  if (Array.isArray(payload?.items)) {return payload.items;}
+  if (Array.isArray(payload?.data)) {return payload.data;}
+  if (Array.isArray(payload?.results)) {return payload.results;}
   return [];
 }
 
 function formatAddressAny(a: any): string {
-  if (!a) return 'Endereço ainda não informado.';
+  if (!a) {return 'Endereço ainda não informado.';}
 
   const street = a?.recipientAddressStreet ?? a?.logradouro ?? a?.street ?? '';
   const number = a?.recipientAddressNumber ?? a?.numero ?? a?.number ?? '';

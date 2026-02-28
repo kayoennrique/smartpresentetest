@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
+import { useEffect, useState } from 'react';
+
+import { loginUser, requestPasswordReset } from '@/services/auth';
 
 import Modal from '../Modal/Modal';
-import { loginUser, requestPasswordReset } from '@/services/auth';
-import { LoginModalProps } from './interface';
+
+import type { LoginModalProps } from './interface';
 
 type LoginMode = 'login' | 'forgot';
 
@@ -34,7 +36,7 @@ export default function LoginModal({
   }
 
   useEffect(() => {
-    if (!open) resetForm();
+    if (!open) {resetForm();}
   }, [open]);
 
   async function handleLogin() {

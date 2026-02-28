@@ -1,15 +1,14 @@
-import Header from "@/components/GeneralComponents/Header/Header";
+import Header from '@/components/GeneralComponents/Header/Header';
+import CtaHome from '@/components/PageHome/CtaHome/CtaHome';
+import FaqHome from '@/components/PageHome/FaqHome/FaqHome';
+import HeroHome from '@/components/PageHome/HeroHome/HeroHome';
+import Marquee from '@/components/PageHome/Marquee/Marquee';
+import StepsSection from '@/components/PageHome/StepHome/StepHome';
+import TestimonialsSection from '@/components/PageHome/TestimonialHome/TestimonialHome';
+import WedoHome from '@/components/PageHome/WedoHome/WedoHome';
+import WedoStepHome from '@/components/PageHome/WedoStepHome/WedoStepHome';
 
-import HeroHome from "@/components/PageHome/HeroHome/HeroHome";
-import StepsSection from "@/components/PageHome/StepHome/StepHome";
-import WedoHome from "@/components/PageHome/WedoHome/WedoHome";
-import StatsHome from "@/components/PageHome/StatsHome/StatsHome";
-import TestimonialsSection from "@/components/PageHome/TestimonialHome/TestimonialHome";
-import CtaHome from "@/components/PageHome/CtaHome/CtaHome";
-import WedoStepHome from "@/components/PageHome/WedoStepHome/WedoStepHome";
-import FaqHome from "@/components/PageHome/FaqHome/FaqHome";
-
-import Footer from "../components/GeneralComponents/Footer/Footer";
+import Footer from '../components/GeneralComponents/Footer/Footer';
 
 export default function Page() {
   return (
@@ -18,7 +17,7 @@ export default function Page() {
       <HeroHome />
       <StepsSection />
       <WedoHome />
-      <StatsHome />
+      <Marquee />
       <TestimonialsSection />
       <CtaHome />
       <WedoStepHome />

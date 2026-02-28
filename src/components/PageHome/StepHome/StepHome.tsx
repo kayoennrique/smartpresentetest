@@ -1,7 +1,9 @@
 'use client';
 
-import { Container } from '@/components/GeneralComponents/Container/Container';
 import { useState, useRef, useEffect } from 'react';
+
+import { Container } from '@/components/GeneralComponents/Container/Container';
+
 import { steps } from './stepsLists';
 
 export default function StepsSection() {
@@ -10,7 +12,7 @@ export default function StepsSection() {
 
   useEffect(() => {
     const container = ref.current;
-    if (!container) return;
+    if (!container) {return;}
 
     const updateIndex = () => {
       const index = Math.round(container.scrollLeft / container.clientWidth);
@@ -23,7 +25,7 @@ export default function StepsSection() {
 
   return (
     <section className="w-full flex justify-center py-3 md:mb-8 mt-4 bg-transparent">
-      <div className="w-full max-w-7xl px-4">
+      <div className="w-full px-4">
         <Container>
           {/* DESKTOP */}
           <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-2 -mt-12">
@@ -35,11 +37,11 @@ export default function StepsSection() {
               >
                 <div>{step.icon}</div>
 
-                <h3 className="font-sora font-semibold text-black mt-4">
+                <h3 className="font-sora font-semibold text-black leading-snug min-h-[52px]">
                   {index + 1}. {step.title}
                 </h3>
 
-                <p className="text-sm text-color-gray-30 leading-relaxed mt-4">
+                <p className="text-sm text-color-gray-30 leading-relaxed text-left w-full">
                   {step.description}
                 </p>
               </div>
@@ -72,11 +74,11 @@ export default function StepsSection() {
               >
                 <div>{step.icon}</div>
 
-                <h3 className="font-semibold text-black mt-4">
+                <h3 className="text-sm font-sora font-semibold text-black leading-snug min-h-[52px]">
                   {index + 1}. {step.title}
                 </h3>
 
-                <p className="text-sm text-color-gray-30 leading-relaxed mt-4">
+                <p className="text-xs text-color-gray-30 leading-relaxed text-left w-full -mt-8">
                   {step.description}
                 </p>
               </div>

@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { AnalyzingScreenProps } from './interface';
+import Image from 'next/image';
+import { useEffect } from 'react';
+
 import { Container } from '@/components/GeneralComponents/Container/Container';
+
+import type { AnalyzingScreenProps } from './interface';
 
 export default function AnalyzingScreen({ onNext }: AnalyzingScreenProps) {
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { ProductSendList } from '../SendList/interface';
+import type { ProductSendList } from '../SendList/interface';
 
 export interface WhatsappQuestionProps {
   onNext: (answer: Record<string, any>) => void;

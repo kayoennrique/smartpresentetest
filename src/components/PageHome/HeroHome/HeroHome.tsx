@@ -1,8 +1,9 @@
 'use client';
 
 import { Container } from '@/components/GeneralComponents/Container/Container';
-import { ImageCarousel } from './ImageCarousel';
 import SearchButton from '@/components/GeneralComponents/SearchButton/SearchButton';
+
+import { ImageCarousel } from './ImageCarousel';
 
 export default function HeroHome() {
   return (
@@ -40,7 +41,7 @@ export default function HeroHome() {
               className="text-[2.25rem] lg:text-[2.375rem] font-bold 
             text-color-red-10 leading-tight font-sora"
             >
-              Descubra o presente ideal e surpreenda a pessoa especial
+              A Inteligência Artificial ajuda você a escolher o presente ideal.
             </h1>
 
             <h2 className="text-color-blue-10 lg:text-[1rem] text-[14px] mt-4 max-w-2xl">

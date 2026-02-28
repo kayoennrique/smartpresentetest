@@ -1,5 +1,6 @@
 import { FiAperture, FiCheckCircle, FiGift, FiMessageSquare } from 'react-icons/fi';
-import { StepItemProps } from './interface';
+
+import type { StepItemProps } from './interface';
 
 export const steps: StepItemProps[] = [
   {

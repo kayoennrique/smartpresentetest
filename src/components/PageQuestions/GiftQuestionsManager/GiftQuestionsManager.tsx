@@ -1,20 +1,20 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 
-import type { GiftListShare, GiftQuestionsManagerProps } from './types';
+import EmptyState from '@/components/GeneralComponents/EmptyState/EmptyState';
+import LoadingState from '@/components/GeneralComponents/LoadingState/LoadingState';
+import SuccessModal from '@/components/GeneralComponents/Modals/SuccessModal/SuccessModal';
+import { getSharedGiftList, selectGiftListItem } from '@/services/giftLists';
+
 import FirstStep from './steps/FirstStep/FirstStep';
 import SecondStep from './steps/SecondStep/SecondStep';
+import type { RecommendedProduct, TipItem } from './steps/SecondStep/types';
 import ThirdStep from './steps/ThirdStep/ThirdStep';
-
-import { getSharedGiftList, selectGiftListItem } from '@/services/giftLists';
-import { RecommendedProduct, TipItem } from './steps/SecondStep/types';
 import type { ThirdStepConfirmPayload } from './steps/ThirdStep/types';
+import type { GiftListShare, GiftQuestionsManagerProps } from './types';
 
-import SuccessModal from '@/components/GeneralComponents/Modals/SuccessModal/SuccessModal';
-import LoadingState from '@/components/GeneralComponents/LoadingState/LoadingState';
-import EmptyState from '@/components/GeneralComponents/EmptyState/EmptyState';
 
 const giftImages = [
   '/amarelo.png',
@@ -30,7 +30,7 @@ function storageKey(shareCode: string) {
 }
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -40,9 +40,9 @@ function safeParse<T>(raw: string | null): T | null {
 
 function buildImageUrl(rawPath: string): string {
   const path = (rawPath || '').trim();
-  if (!path) return '';
+  if (!path) {return '';}
 
-  if (/^https?:\/\//i.test(path)) return path;
+  if (/^https?:\/\//i.test(path)) {return path;}
 
   const BUCKET_BASE = 'bucket.api.smartpresente.com.br';
   const cleanPath = path.replace(/^\//, '');
@@ -53,7 +53,7 @@ function buildImageUrl(rawPath: string): string {
 function normalizeItemToProduct(item: any): RecommendedProduct | null {
   const p = item?.product;
 
-  if (!item?.id || !p?.productName) return null;
+  if (!item?.id || !p?.productName) {return null;}
 
   return {
     id: String(item.id),
@@ -91,7 +91,7 @@ export default function GiftQuestionsManager({ shareCode }: GiftQuestionsManager
   const [successOpen, setSuccessOpen] = useState(false);
 
   const savedChoice = useMemo(() => {
-    if (typeof window === 'undefined') return null;
+    if (typeof window === 'undefined') {return null;}
 
     return safeParse<{
       itemId?: string;
@@ -136,7 +136,7 @@ export default function GiftQuestionsManager({ shareCode }: GiftQuestionsManager
     }
 
     const selected = productsForDetails.find((p) => String(p.id) === String(selectedItemId));
-    if (!selected) return 'Selecione um presente para continuar.';
+    if (!selected) {return 'Selecione um presente para continuar.';}
 
     const parts = [selected.productName?.trim(), selected.description?.trim()].filter(Boolean);
 
@@ -159,7 +159,7 @@ export default function GiftQuestionsManager({ shareCode }: GiftQuestionsManager
     }
 
     const p = productsForDetails.find((x) => String(x.id) === String(selectedItemId));
-    if (!p) return null;
+    if (!p) {return null;}
 
     return {
       title: p.productName || 'Presente selecionado',
@@ -241,7 +241,7 @@ export default function GiftQuestionsManager({ shareCode }: GiftQuestionsManager
   };
 
   const confirmChoice = async () => {
-    if (!selectedItemId || submitting) return;
+    if (!selectedItemId || submitting) {return;}
     setSubmitError(null);
     setStep(3);
   };
@@ -253,7 +253,7 @@ export default function GiftQuestionsManager({ shareCode }: GiftQuestionsManager
       return;
     }
 
-    if (submitting || successOpen) return;
+    if (submitting || successOpen) {return;}
 
     setSubmitting(true);
     setSubmitError(null);

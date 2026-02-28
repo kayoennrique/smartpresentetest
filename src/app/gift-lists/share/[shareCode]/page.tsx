@@ -1,5 +1,6 @@
 import GiftQuestionsManager from '@/components/PageQuestions/GiftQuestionsManager/GiftQuestionsManager';
-import { PageProps } from './types';
+
+import type { PageProps } from './types';
 
 export default async function Page({ params }: PageProps) {
   const { shareCode } = await params;

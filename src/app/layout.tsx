@@ -1,6 +1,6 @@
 import './globals.css';
-import { Inter, Sora, Parisienne } from 'next/font/google';
 import type { Metadata } from 'next';
+import { Inter, Sora, Parisienne } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

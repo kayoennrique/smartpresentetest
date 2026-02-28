@@ -24,7 +24,7 @@ const ITEMS_KEY = 'gift-list-items';
 const DEFAULT_RECIPIENT_PHONE = process.env.NEXT_PUBLIC_DEFAULT_RECIPIENT_PHONE || '+5511999999999';
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -34,23 +34,23 @@ function safeParse<T>(raw: string | null): T | null {
 
 /* HEADER */
 function readHeaderStorage(): Partial<HeaderPayload> {
-  if (typeof window === 'undefined') return {};
+  if (typeof window === 'undefined') {return {};}
   return safeParse<HeaderPayload>(localStorage.getItem(HEADER_KEY)) ?? {};
 }
 
 function writeHeaderStorage(next: HeaderPayload) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
   localStorage.setItem(HEADER_KEY, JSON.stringify(next));
 }
 
 /* ITEMS */
 function readItemsStorage(): ItemsPayload {
-  if (typeof window === 'undefined') return { items: [] };
+  if (typeof window === 'undefined') {return { items: [] };}
   return safeParse<ItemsPayload>(localStorage.getItem(ITEMS_KEY)) ?? { items: [] };
 }
 
 function writeItemsStorage(next: ItemsPayload) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
   localStorage.setItem(ITEMS_KEY, JSON.stringify(next));
 }
 
@@ -95,7 +95,7 @@ export function useGiftListPayloads() {
     ): ItemsPayload => {
       const items = products.map((p) => {
         const giftHintMessage = String(tips[p.id] ?? '').trim();
-        if (!giftHintMessage) throw new Error('Preencha todas as dicas.');
+        if (!giftHintMessage) {throw new Error('Preencha todas as dicas.');}
 
         return {
           productId: p.id,

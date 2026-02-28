@@ -1,9 +1,8 @@
-import Header from "@/components/GeneralComponents/Header/Header";
-
-import MainFaq from "@/components/PageFaq/MainFaq/MainFaq";
-import ContactFaq from "@/components/PageFaq/ContactFaq/ContactFaq";
-
 import Footer from "@/components/GeneralComponents/Footer/Footer";
+import Header from "@/components/GeneralComponents/Header/Header";
+import ContactFaq from "@/components/PageFaq/ContactFaq/ContactFaq";
+import MainFaq from "@/components/PageFaq/MainFaq/MainFaq";
+
 
 export default function Page() {
   return (

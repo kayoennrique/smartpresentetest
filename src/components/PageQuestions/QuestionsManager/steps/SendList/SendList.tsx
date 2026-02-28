@@ -1,27 +1,27 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-import type { ItemPayload, SendListProps, TipSource } from './interface';
 
-import { TIPS_BY_PERSON } from './giftTips';
-import { getFirstQuestionAnswer, mapPersonToTipKey } from './tipMapping';
-import { saveItems, ITEMS_KEY } from './storage';
-import TipImage from './TipImage';
-import TipForm from './TipForm';
 
+import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
+import PreviewModal from '@/components/PageQuestions/PreviewModal/PreviewModal';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import QuestionsTitle from '@/components/PageQuestions/QuestionsTitle/QuestionsTitle';
 
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
-import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
 
-import PreviewModal from '@/components/PageQuestions/PreviewModal/PreviewModal';
+import { TIPS_BY_PERSON } from './giftTips';
+import type { ItemPayload, SendListProps, TipSource } from './interface';
+import { saveItems, ITEMS_KEY } from './storage';
+import TipForm from './TipForm';
+import TipImage from './TipImage';
+import { getFirstQuestionAnswer, mapPersonToTipKey } from './tipMapping';
 
 function safeParse<T>(raw: string | null): T | null {
-  if (!raw) return null;
+  if (!raw) {return null;}
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -30,14 +30,14 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 function saveItemsDraft(items: ItemPayload[]) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
   localStorage.setItem(ITEMS_KEY, JSON.stringify({ items }));
 }
 
 function loadItemsDraft(): ItemPayload[] {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === 'undefined') {return [];}
   const parsed = safeParse<{ items?: ItemPayload[] }>(localStorage.getItem(ITEMS_KEY));
-  if (!parsed?.items || !Array.isArray(parsed.items)) return [];
+  if (!parsed?.items || !Array.isArray(parsed.items)) {return [];}
   return parsed.items;
 }
 
@@ -77,22 +77,22 @@ export default function SendList({
   };
 
   const canGoNext = useMemo(() => {
-    if (!products.length) return false;
-    if (currentIndex >= products.length - 1) return false;
+    if (!products.length) {return false;}
+    if (currentIndex >= products.length - 1) {return false;}
     const id = products[currentIndex]?.id;
     return !!tips[id]?.trim();
   }, [products, currentIndex, tips]);
 
   useEffect(() => {
-    if (!products.length) return;
+    if (!products.length) {return;}
     setCurrentIndex((i) => Math.min(i, products.length - 1));
   }, [products.length]);
 
   useEffect(() => {
-    if (!products.length) return;
+    if (!products.length) {return;}
 
     const items = loadItemsDraft();
-    if (!items.length) return;
+    if (!items.length) {return;}
 
     const productIds = new Set(products.map((p) => p.id));
 
@@ -100,7 +100,7 @@ export default function SendList({
     const restoredSource: Record<string, TipSource> = {};
 
     for (const it of items) {
-      if (!it?.productId || !productIds.has(it.productId)) continue;
+      if (!it?.productId || !productIds.has(it.productId)) {continue;}
 
       restoredTips[it.productId] = it.giftHintMessage ?? '';
       restoredSource[it.productId] = it.giftHintSource ?? 'USER';
@@ -130,7 +130,7 @@ export default function SendList({
     const tipKey = mapPersonToTipKey(firstAnswer);
     const tipsList = TIPS_BY_PERSON[tipKey];
 
-    if (!tipsList?.length) return;
+    if (!tipsList?.length) {return;}
 
     const randomTip = tipsList[Math.floor(Math.random() * tipsList.length)];
 
@@ -166,7 +166,7 @@ export default function SendList({
   };
 
   const handleSubmit = () => {
-    if (!allTipsFilled) return;
+    if (!allTipsFilled) {return;}
 
     const items: ItemPayload[] = products.map((p) => ({
       productId: p.id,
@@ -246,20 +246,20 @@ export default function SendList({
                       onTouchEnd={(e) => {
                         const start = touchStartX.current;
                         touchStartX.current = null;
-                        if (start == null) return;
+                        if (start == null) {return;}
 
                         const end = e.changedTouches[0]?.clientX ?? start;
                         const delta = end - start;
 
                         const THRESHOLD = 40;
-                        if (Math.abs(delta) < THRESHOLD) return;
+                        if (Math.abs(delta) < THRESHOLD) {return;}
 
                         if (delta < 0) {
-                          if (canGoNext) goNext();
+                          if (canGoNext) {goNext();}
                           return;
                         }
 
-                        if (delta > 0) goPrev();
+                        if (delta > 0) {goPrev();}
                       }}
                     >
                       <div className="p-4">

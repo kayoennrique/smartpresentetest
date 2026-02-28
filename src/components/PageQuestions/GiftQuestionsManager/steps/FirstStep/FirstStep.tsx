@@ -1,11 +1,11 @@
 'use client';
 
-import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import SurveyActions from '@/components/GeneralComponents/ActionBtn/ActionBtn';
+import ProgressBar from '@/components/GeneralComponents/ProgressBar/ProgressBar';
 import QuestionsHeader from '@/components/PageQuestions/QuestionsHeader/QuestionsHeader';
 import GiftCardForm from '@/components/PageQuestions/QuestionsManager/steps/SignatureList/GiftReadyList/GiftCardForm';
 
-import { Props } from './interface';
+import type { Props } from './interface';
 
 export default function FirstStep({
   senderName,
@@ -22,7 +22,7 @@ export default function FirstStep({
       <div className="px-6 w-full flex flex-col">
         <p className="text-lg font-semibold text-gray-900 leading-relaxed">
           Olá <span className="text-[#4E8872]">{recipientName}! </span>
-          <span className="text-[#4E8872]">{senderName}</span> enviou uma cesta de presentes
+          <span className="text-[#4E8872]">{senderName}</span> enviou uma lista de presentes
           personalizada para você!
         </p>
 

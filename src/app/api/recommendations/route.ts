@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server';
 import axios from 'axios';
+import { NextResponse } from 'next/server';
+
 import { upstream } from '@/server/upstream';
 
 export async function POST(req: Request) {

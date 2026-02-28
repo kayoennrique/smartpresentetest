@@ -1,11 +1,16 @@
 'use client';
 
-import { Container } from '@/components/GeneralComponents/Container/Container';
 import { useState, useMemo } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import { MdOutlineMessage } from 'react-icons/md';
-import { faqByTab, TabId } from './faqItems';
-import { SectionFaqProps } from '../interfaces';
+
+import { Container } from '@/components/GeneralComponents/Container/Container';
+
+import type { SectionFaqProps } from '../interfaces';
+
+import type { TabId } from './faqItems';
+import { faqByTab } from './faqItems';
+
 
 const tabs: { id: TabId; label: string }[] = [
   { id: 'comofunciona', label: 'Como Funciona' },
@@ -21,7 +26,7 @@ export default function SectionFaq({ searchTerm }: SectionFaqProps) {
   const questions = faqByTab[activeTab];
 
   const filteredQuestions = useMemo(() => {
-    if (!searchTerm.trim()) return questions;
+    if (!searchTerm.trim()) {return questions;}
 
     const words = searchTerm.toLowerCase().split(' ').filter(Boolean);
 

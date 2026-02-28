@@ -81,7 +81,13 @@ export default function Footer() {
          md:items-start md:text-left justify-between text-xs text-white/80 
          gap-4 ml-0 md:ml-16 lg:ml-0 mb-8 md:mb-0"
         >
-          <p>© 2026 SmartPresente. Administrado por Techevery - CNPJ : 33.376.290/0001-21</p>
+          <p>
+            © 2026 SmartPresente. Administrado por{' '}
+            <a href="https://www.techevery.com.br/" className="hover:underline">
+              Techevery
+            </a>{' '}
+            - CNPJ : 33.376.290/0001-21
+          </p>
         </div>
       </div>
     </footer>

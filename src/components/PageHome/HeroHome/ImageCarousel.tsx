@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
-import { CarouselProps } from "./interface";
+import { useState, useEffect } from "react";
+
+import type { CarouselProps } from "./interface";
 
 export function ImageCarousel({ images, alt }: CarouselProps) {
   const [current, setCurrent] = useState(0);

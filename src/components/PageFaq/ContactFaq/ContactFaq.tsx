@@ -1,11 +1,13 @@
-"use client";
+'use client';
 
-import { Container } from "@/components/GeneralComponents/Container/Container";
-import { Icon } from "@iconify/react";
-import { FiHeadphones } from "react-icons/fi";
-import emailjs from "@emailjs/browser";
-import { FormEvent, useRef, useState } from "react";
-import { toast } from "react-toastify";
+import emailjs from '@emailjs/browser';
+import { Icon } from '@iconify/react';
+import type { FormEvent} from 'react';
+import { useRef, useState } from 'react';
+import { FiHeadphones } from 'react-icons/fi';
+import { toast } from 'react-toastify';
+
+import { Container } from '@/components/GeneralComponents/Container/Container';
 
 export default function ContactFaq() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -14,7 +16,7 @@ export default function ContactFaq() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!formRef.current || isLoading) return;
+    if (!formRef.current || isLoading) {return;}
 
     setIsLoading(true);
 
@@ -23,14 +25,14 @@ export default function ContactFaq() {
         process.env.NEXT_PUBLIC_SERVICE_ID!,
         process.env.NEXT_PUBLIC_TEMPLATE_ID!,
         formRef.current,
-        process.env.NEXT_PUBLIC_USER_ID
+        process.env.NEXT_PUBLIC_USER_ID,
       );
 
-      toast.success("Dúvida enviada com sucesso! ✨🎁");
+      toast.success('Dúvida enviada com sucesso! ✨🎁');
       formRef.current.reset();
     } catch (error) {
       console.error(error);
-      toast.error("Erro ao enviar mensagem. Tente novamente 😢");
+      toast.error('Erro ao enviar mensagem. Tente novamente 😢');
     } finally {
       setIsLoading(false);
     }
@@ -58,11 +60,7 @@ export default function ContactFaq() {
               </p>
             </div>
 
-            <form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-5"
-            >
+            <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="flex flex-col gap-1">
                 <label className="text-sm text-gray-600">Nome</label>
                 <input
@@ -101,8 +99,8 @@ export default function ContactFaq() {
                 className={`w-full h-2 py-6 flex items-center justify-center gap-2 rounded-xl transition-opacity
                   ${
                     isLoading
-                      ? "bg-gray-300 cursor-not-allowed"
-                      : "bg-red-gradient text-white hover:opacity-90"
+                      ? 'bg-gray-300 cursor-not-allowed'
+                      : 'bg-red-gradient text-white hover:opacity-90'
                   }`}
               >
                 {isLoading ? (

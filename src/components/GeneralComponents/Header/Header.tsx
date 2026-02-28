@@ -1,18 +1,18 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { Icon } from '@iconify/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Container } from '@/components/GeneralComponents/Container/Container';
-import { Icon } from '@iconify/react';
+import { isLogged as isLoggedAuth, logout as logoutAuth } from '@/utils/auth';
 
 import LoginModal from '../Modals/LoginModal/LoginModal';
 import RegisterModal from '../Modals/RegisteModal/RegisterModal';
 import TokenAccessModal from '../Modals/TokenAccessModal/TokenAccessModal';
 
-import { isLogged as isLoggedAuth, logout as logoutAuth } from '@/utils/auth';
 
 const Header = () => {
   const pathname = usePathname();
@@ -128,7 +128,7 @@ const Header = () => {
               >
                 <Link href="/questions">Descubra o presente</Link>
                 <Link href="/parceiros">Seja parceiro</Link>
-                <a href="mailto:contato@presentesobmedida.com.br">Fale conosco</a>
+                <a href="mailto:contato@smartpresente.com.br">Fale conosco</a>
                 <Link href="/faq">FAQ</Link>
               </nav>
 
@@ -260,7 +260,7 @@ const Header = () => {
               <div className="px-6 py-4 flex flex-col gap-4 text-white">
                 <Link href="/questions">Descubra o presente</Link>
                 <Link href="/parceiros">Seja parceiro</Link>
-                <a href="mailto:contato@presentesobmedida.com.br">Fale conosco</a>
+                <a href="mailto:contato@smartpresente.com.br">Fale conosco</a>
                 <Link href="/faq">FAQ</Link>
 
                 <div className="flex flex-col gap-4">

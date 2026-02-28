@@ -1,4 +1,4 @@
-import { GiftVisibilityValue } from './GiftReadyList/types';
+import type { GiftVisibilityValue } from './GiftReadyList/types';
 
 export interface FirstQuestionProps {
   onNext: (answer: Record<string, string | string[]>) => void;
