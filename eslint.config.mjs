@@ -38,7 +38,7 @@ export default defineConfig([
       curly: ['warn', 'all'],
       'prefer-const': 'warn',
 
-      // Complexidade e tamanho (guia, não dogma)
+      // Complexidade e tamanho 
       complexity: ['warn', { max: 10 }],
       'max-lines-per-function': [
         'warn',
@@ -82,9 +82,8 @@ export default defineConfig([
   },
 
   // Arquitetura — UI pura não consome services
-  // (Se você quiser manter a regra antiga, mude esse glob para src/components/**)
   {
-    files: ['src/components/ui/**/*.{ts,tsx}'],
+    files: ['src/components/**.{ts,tsx}'],
     rules: {
       'no-restricted-imports': [
         'warn',

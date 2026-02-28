@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import  { useEffect, useRef, useState } from 'react';
 
 import { Container } from '@/components/GeneralComponents/Container/Container';
 import { isLogged as isLoggedAuth, logout as logoutAuth } from '@/utils/auth';
