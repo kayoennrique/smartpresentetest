@@ -1,10 +1,12 @@
-# 🛡️ ESLint Config — SmartPresente
+# 🛡️ ESLint — SmartPresente
 
-O objetivo é garantir **qualidade de código, previsibilidade arquitetural e escalabilidade** de forma automatizada, com regras graduais que não bloqueiam o fluxo do time.
+Configuração focada em **qualidade, previsibilidade arquitetural e segurança contra bugs comuns**, sem burocracia.
+
+> ESLint ajuda, mas não substitui revisão de PR (nomes, design, coesão e testes).
 
 ---
 
-## 📦 Dependências necessárias
+## 📦 Instalação
 
 ```bash
 npm install -D \
@@ -20,131 +22,126 @@ npm install -D \
 
 ---
 
-## ▶️ Comandos
+## ▶️ Scripts
 
-```bash
-npm run lint        # Analisa o projeto
-npm run lint:fix    # Corrige automaticamente o que for possível
+```json
+{
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  }
+}
 ```
-
-> Sugestão de scripts no `package.json`:
->
-> ```json
-> "lint": "eslint .",
-> "lint:fix": "eslint . --fix"
-> ```
 
 ---
 
-## 🗂️ Estrutura da configuração
+# 📏 Regras Principais
 
-A config é dividida em **3 blocos** com escopos distintos.
+Aplicadas a `.ts`, `.tsx`, `.js`, `.jsx`.
 
-### 1️⃣ Regras gerais
+### 🔴 Erros (bloqueiam merge)
 
-Aplicadas a **todos os arquivos** `.ts`, `.tsx`, `.js`, `.jsx`.
+- `no-debugger`
+- `react-hooks/rules-of-hooks`
+- `jsx-a11y/alt-text`
 
-| Categoria    | Regra                     | Nível    | Por quê                                       |
-| ------------ | ------------------------- | -------- | --------------------------------------------- |
-| Qualidade    | `no-debugger`             | 🔴 error | Jamais commitar `debugger`                    |
-| Qualidade    | `no-console`              | 🟡 warn  | Permite apenas `warn` e `error`               |
-| Qualidade    | `eqeqeq`                  | 🟡 warn  | Exige `===` para evitar coerção silenciosa    |
-| Qualidade    | `curly`                   | 🟡 warn  | Chaves obrigatórias em todos os blocos        |
-| Qualidade    | `prefer-const`            | 🟡 warn  | Favorece imutabilidade onde possível          |
-| Complexidade | `complexity`              | 🟡 warn  | Máximo 10 caminhos por função                 |
-| Complexidade | `max-lines-per-function`  | 🟡 warn  | Máximo 50 linhas por função                   |
-| TypeScript   | `no-explicit-any`         | 🟡 warn  | Proíbe uso de `any` sem justificativa         |
-| TypeScript   | `no-unused-vars`          | 🟡 warn  | Variáveis não usadas (exceto prefixo `_`)     |
-| TypeScript   | `consistent-type-imports` | 🟡 warn  | Exige `import type` para tipos                |
-| Imports      | `import/order`            | 🟡 warn  | Organiza imports por grupo e ordem alfabética |
-| React        | `self-closing-comp`       | 🟡 warn  | `<Comp />` em vez de `<Comp></Comp>`          |
-| React        | `jsx-no-useless-fragment` | 🟡 warn  | Remove `<></>` desnecessários                 |
-| React        | `no-array-index-key`      | 🟡 warn  | Evita bugs silenciosos em listas              |
-| Hooks        | `rules-of-hooks`          | 🔴 error | Hooks só em componentes/hooks                 |
-| Hooks        | `exhaustive-deps`         | 🟡 warn  | Dependências corretas no `useEffect`          |
-| A11y         | `alt-text`                | 🔴 error | Toda imagem precisa de `alt`                  |
-| A11y         | `no-autofocus`            | 🟡 warn  | `autofocus` prejudica navegação               |
+### 🟡 Avisos (adoção gradual)
+
+- `no-console` (apenas `warn` e `error` permitidos)
+- `eqeqeq`
+- `curly`
+- `prefer-const`
+- `complexity` (máx. 10)
+- `max-lines-per-function` (máx. 80)
+- `@typescript-eslint/no-explicit-any`
+- `@typescript-eslint/no-unused-vars` (ignora `_`)
+- `@typescript-eslint/consistent-type-imports`
+- `import/order`
+- `react/no-array-index-key`
+- `react-hooks/exhaustive-deps`
+
+> Regras de complexidade e tamanho são **guia**, não objetivo numérico cego.
 
 ---
 
-### 2️⃣ Arquitetura — `src/components/**`
+# 🏗️ Arquitetura do Projeto
 
-Componentes visuais **não podem importar** `services` diretamente.
-
-```
-❌ import { fetchUser } from '@/services/userService'  ← dentro de um componente
-✅ const { user } = useUser()                          ← via hook
-```
-
-> **Motivo:** manter apresentação desacoplada de lógica de negócio e chamadas remotas.
-
----
-
-### 3️⃣ Arquitetura — `src/services/**`
-
-Services **não podem importar** componentes visuais.
+Estrutura real considerada:
 
 ```
-❌ import { Button } from '@/components/Button'  ← dentro de um service
-✅ retornar dados e deixar o componente renderizar
+src/
+ ├─ app/
+ ├─ components/
+ │   ├─ ui/          ← componentes puramente visuais
+ │   └─ ...          ← componentes com lógica (containers)
+ ├─ hooks/
+ ├─ services/
+ ├─ utils/
+ └─ types/
 ```
 
-> **Motivo:** evitar dependência circular e manter a camada de serviço pura e testável.
+## 🔹 UI pura (`src/components/ui/**`)
 
----
-
-## 🔢 Organização de imports
-
-A regra `import/order` força a seguinte ordem, com linha em branco entre grupos:
+Não pode importar `services` diretamente.
 
 ```ts
-// 1. Node built-ins
-import fs from 'fs';
+// ❌
+import { createGift } from '@/services/giftService';
 
-// 2. Dependências externas
-import { useQuery } from '@tanstack/react-query';
-
-// 3. Aliases internos (@/)
-import { api } from '@/services/api';
-
-// 4. Relativos pai
-import { formatDate } from '../utils/date';
-
-// 5. Relativos irmão / índice
-import { Button } from './Button';
+// ✅
+const { createGift } = useGift();
 ```
 
+Motivo: manter apresentação desacoplada de IO.
+
+## 🔹 Services (`src/services/**`)
+
+Não podem importar componentes.
+
+```ts
+// ❌
+import { Button } from '@/components/ui/Button';
+```
+
+Motivo: manter camada de serviço pura e testável.
+
 ---
 
-## 🚦 Filosofia de níveis
+# 📦 Organização de Imports
 
-| Nível      | Quando usar                                                 |
-| ---------- | ----------------------------------------------------------- |
-| 🔴 `error` | Quebra de regra crítica — deve ser corrigida antes do merge |
-| 🟡 `warn`  | Ponto de atenção — permite adoção gradual sem bloquear CI   |
+Ordem obrigatória:
 
-> Regras começam como `warn` para não travar o time. À medida que o código se adequa, podem ser promovidas para `error`.
+1. Built-ins (Node)
+2. Externos
+3. Aliases internos (`@/`)
+4. Relativos (`../`)
+5. Irmãos (`./`)
+
+Sempre com linha em branco entre grupos.
 
 ---
 
-## ⚠️ Exceções
+# ⚠️ Exceções
 
-Se uma feature exigir exceção a alguma regra, use comentário inline com justificativa:
+Use apenas quando necessário e com justificativa:
 
 ```ts
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const payload: any = externalLegacyLib.getData();
+const payload: any = legacyLib.getData();
 ```
-
-Exceções recorrentes devem ser **documentadas no PR** com justificativa técnica.
 
 ---
 
-## 🗃️ Arquivos ignorados
+# ❗ O que o ESLint NÃO resolve
 
-```
-.next/
-out/
-build/
-next-env.d.ts
-```
+- Bons nomes
+- Responsabilidade única
+- Abstrações mal feitas
+- Testes
+- Modelagem de domínio
+
+Esses pontos são responsabilidade da revisão de código.
+
+---
+
+Configuração pensada para manter o projeto consistente sem travar a evolução.
