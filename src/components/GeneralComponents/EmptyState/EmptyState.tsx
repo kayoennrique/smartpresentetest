@@ -2,10 +2,8 @@
 
 import { Container } from '../Container/Container';
 
-type Props = {
-  title: string;
-  description: string;
-};
+import type { Props } from './type';
+
 
 export default function EmptyState({ title, description }: Props) {
   return (
